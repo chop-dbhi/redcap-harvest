@@ -10,4 +10,4 @@ MODELTREES = {
     }
 }
 
-SECRET_KEY='abc123'
+SECRET_KEY = 'abc123'

@@ -9,6 +9,7 @@ RUN harvest init --no-input --no-env project 2>&1 > /dev/null
 
 # Work inside of the generated "project" directory containing the Harvest project.
 WORKDIR project/
+
 # Add settings and entrypoint script.
 ADD local_settings.py ./project/conf/
 ADD start ./

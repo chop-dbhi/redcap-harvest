@@ -35,7 +35,7 @@ MODELTREES = {
     }
 }
 
-SECRET_KEY='abc123'
+SECRET_KEY = 'abc123'
 ```
 
 To define a custom database, simply define the Django `DATABASES` setting. This example assumes a container `db` will be linked to this one.
