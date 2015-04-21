@@ -2,32 +2,18 @@
 
 Dockerfile and tools for deriving Harvest applications from REDCap projects.
 
-Installation and Setup
-----------------------
+## Requirements
 
-This tool runs using Docker. Install it if you don't have it:
+- [Docker](http://docs.docker.com/installation/)
 
-[Install Docker](http://docs.docker.com/installation/) 
+## Run
 
-In order to run the container, you need to place your data dictonary and data file in a folder. Name the data dictonary and data file "metadata.csv" and "data.csv", respectively.
+The Docker file relies on the REDCap data dictionary and data file to build the Harvest application. These files must be made available by mounting a volume to `/input` containing these files. By default the file names are `metadata.csv` and `data.csv`, however these can be configured by setting the `$METADATA_FILE` and `$DATA_FILE` environment variables.
 
-Now run the container:
+To run an interactive container:
 
 ```bash
-docker run --rm -it -p 8001:8000 -v path/to/your/inputfolder:/input dbhi/redcap-harvest
+docker run --rm -it -p 8000:8000 -v /path/to/your/input:/input dbhi/redcap-harvest
 ```
 
-The Harvest server will report the IP it is running at, which should be 0.0.0.0:8000.
-The run command above maps the container's 8000 port to your machine's 8001. so the IP is0.0.0.0:8001.
-Go to this IP in your web browser to be brought to a new Harvest instance with your data.
-
-Note:
-If you are running this on Mac, this IP will not be correct. (It is the IP in the Virtual Machine the container is running in.)
-To get the correct IP, type:
-```bash
-boot2docker ip
-```
-The correct IP address is:
-```bash
-<output from boot2docker ip>:8001
-```
+The startup script will build a SQLite database for Harvest from the metadata and data files and then end with running the Django server on port 8000.
