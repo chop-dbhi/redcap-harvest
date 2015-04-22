@@ -6,10 +6,10 @@ echo 'Interpreting data dictionary...'
 python bin/manage.py redcap json /input/$METADATA_FILE
 
 echo 'Generating models...'
-python bin/manage.py redcap models metadata.json -o project/models.py
+python bin/manage.py redcap models ${METADATA_FILE%.csv}.json -o project/models.py
 
 echo 'Creating fixtures from data...'
-python bin/manage.py redcap fixture /input/$DATA_FILE metadata.json project
+python bin/manage.py redcap fixture /input/$DATA_FILE ${METADATA_FILE%.csv}.json project
 
 echo 'Synchronizing database...'
 python bin/manage.py syncdb
