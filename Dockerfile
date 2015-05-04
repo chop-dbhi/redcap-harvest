@@ -1,4 +1,5 @@
 FROM python:2-onbuild
+
 MAINTAINER James Swanick "swanijam@gmail.com"
 
 RUN apt-get update -qq
@@ -12,15 +13,15 @@ WORKDIR project/
 
 # Add settings and entrypoint script.
 ADD local_settings.py ./project/conf/
-ADD start ./
+ADD entrypoint.sh ./
 
 # Default names of the input files.
 ENV METADATA_FILE metadata.csv
 ENV DATA_FILE data.csv
 
 # Run the entrypoint script which sets up the instance with the REDCap data.
-ENTRYPOINT ["/bin/bash", "./start"]
+ENTRYPOINT ["/bin/bash", "./entrypoint.sh"]
 
-CMD ["runserver", "0.0.0.0:8000"]
+CMD ["python", "bin/manage.py", "runserver", "0.0.0.0:8000"]
 
 EXPOSE 8000
