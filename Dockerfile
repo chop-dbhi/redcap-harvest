@@ -1,6 +1,6 @@
 FROM python:2-onbuild
 
-MAINTAINER James Swanick "swanijam@gmail.com"
+MAINTAINER Byron Ruth "b@devel.io"
 
 RUN apt-get update -qq
 RUN apt-get install unzip -y
